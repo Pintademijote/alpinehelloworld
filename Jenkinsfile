@@ -4,7 +4,7 @@ pipeline {
        IMAGE_TAG = "latest"
        STAGING = "pintade-staging"
        PRODUCTION = "pintade-production"
-	docker_user = "pintade"
+	   docker_user = "pintade"
      }
      agent none
      stages {
@@ -46,6 +46,7 @@ pipeline {
                sh '''
                  docker stop $IMAGE_NAME
                  docker rm $IMAGE_NAME
+				 docker push 
                '''
              }
           }
@@ -92,10 +93,12 @@ pipeline {
           agent any
           steps {
              script {
-               sh '''
-				docker login -u ${docker_user} -p credentials('docker_pw')
-				docker push 
-               '''
+				node {
+					withCredentials([string(credentialsId: 'docker_pw', variable: 'SECRET')]) {
+						docker login -u ${docker_user} -p ${SECRET}
+						docker push pintade/$IMAGE_NAME:$IMAGE_TAG
+					}
+				}
              }
           }
      }
