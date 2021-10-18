@@ -97,7 +97,7 @@ pipeline {
 					withCredentials([string(credentialsId: 'docker_pw', variable: 'SECRET')]) {
 					sh '''
 						docker login -u ${docker_user} -p ${SECRET}
-						docker push pintade/$IMAGE_NAME:$IMAGE_TAG
+						docker pintade/$IMAGE_NAME:$IMAGE_TAG push
 					'''
 					}
 				}
