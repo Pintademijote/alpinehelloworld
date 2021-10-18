@@ -6,7 +6,7 @@ pipeline {
        PRODUCTION = "pintade-production"
 	   docker_user = "pintade"
      }
-     agent none
+     agent { label 'master' }
      stages {
          stage('Build image') {
              agent any
@@ -92,7 +92,7 @@ pipeline {
           steps {
              script {
                sh '''
-				docker login -u ${docker_user} -p
+				docker login -u ${docker_user} -p credentials('docker_pw')
 				docker push 
                '''
              }
