@@ -4,7 +4,7 @@ pipeline {
        IMAGE_TAG = "latest"
        STAGING = "pintade-staging"
        PRODUCTION = "pintade-production"
-	   docker_user = "pintade"
+	docker_user = "pintade"
      }
      agent none
      stages {
@@ -44,9 +44,8 @@ pipeline {
           steps {
              script {
                sh '''
-                 docker stop pintade/$IMAGE_NAME
-                 docker rm pintade/$IMAGE_NAME
-				 docker push 
+                 docker stop $IMAGE_NAME
+                 docker rm $IMAGE_NAME
                '''
              }
           }
