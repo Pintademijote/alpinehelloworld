@@ -44,8 +44,8 @@ pipeline {
           steps {
              script {
                sh '''
-                 docker stop $IMAGE_NAME
-                 docker rm $IMAGE_NAME
+                 docker stop pintade/$IMAGE_NAME
+                 docker rm pintade/$IMAGE_NAME
 				 docker push 
                '''
              }
