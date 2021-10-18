@@ -6,7 +6,7 @@ pipeline {
        PRODUCTION = "pintade-production"
 	   docker_user = "pintade"
      }
-     agent { label 'master' }
+     agent none
      stages {
          stage('Build image') {
              agent any
